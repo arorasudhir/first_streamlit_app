@@ -62,7 +62,7 @@ df2 = df
 # if 'df' not in st.session_state:
 #    st.session_state.df = df
 
-st.title('Snowflake Table Catalog')
+streamlit.title('Snowflake Table Catalog')
 
 def human_bytes(B):
     """Return the given bytes as a human friendly KB, MB, GB, or TB string."""
@@ -115,11 +115,11 @@ def human_format(num):
 
 def local_css(file_name):
     with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        streamlit.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 
 def remote_css(url):
-    st.markdown(f'<link href="{url}" rel="stylesheet">',
+    streamlit.markdown(f'<link href="{url}" rel="stylesheet">',
                 unsafe_allow_html=True)
 
 
@@ -137,35 +137,35 @@ remote_css(
 
 
 local_css("style.css")
-cb_view_details = st.sidebar.checkbox('View Details')
+cb_view_details = streamlit.sidebar.checkbox('View Details')
 
 if cb_view_details:
     view_details=""
 else:
     view_details="""style="display: none;" """
 
-selectbox_orderby = st.sidebar.selectbox("Order By", ('A → Z', 'Z → A', 'Data Size ↓', 'Data Size ↑',
+selectbox_orderby = streamlit.sidebar.selectbox("Order By", ('A → Z', 'Z → A', 'Data Size ↓', 'Data Size ↑',
                                          'Rows ↓', 'Rows ↑', 'Date Created ↓', 'Date Created ↑', 'Date Altered ↓', 'Date Altered ↑'))
-#button_clicked = st.button("OK")
+#button_clicked = streamlit.button("OK")
 
 all_option = pd.Series(['All'], index=[9999999])
 
 #TABLE_SCHEMA=TABLE_SCHEMA.append({'TABLE_SCHEMA':'All'},ignore_index = True)
 
-if 'selectbox_database_key' not in st.session_state:
-    st.session_state.selectbox_database_key = 10
-    st.session_state.selectbox_schema_key = 20
-    st.session_state.selectbox_owner_key = 30
-    st.session_state.selectbox_table_type_key = 40
-    st.session_state.selectbox_max_rows_key = 50
-    st.session_state.selectbox_data_size_key = 60
+if 'selectbox_database_key' not in streamlit.session_state:
+    streamlit.session_state.selectbox_database_key = 10
+    streamlit.session_state.selectbox_schema_key = 20
+    streamlit.session_state.selectbox_owner_key = 30
+    streamlit.session_state.selectbox_table_type_key = 40
+    streamlit.session_state.selectbox_max_rows_key = 50
+    streamlit.session_state.selectbox_data_size_key = 60
 
 # Table Catalog/Database
 fv_database = df['TABLE_CATALOG'].drop_duplicates()
 fv_database = fv_database.append(all_option)
 
-selectbox_database = st.sidebar.selectbox(
-    'Database', fv_database, index=len(fv_database)-1, key=st.session_state.selectbox_database_key)
+selectbox_database = streamlit.sidebar.selectbox(
+    'Database', fv_database, index=len(fv_database)-1, key=streamlit.session_state.selectbox_database_key)
 
 if selectbox_database != 'All':
     df = df.loc[df['TABLE_CATALOG'] == selectbox_database]
@@ -176,8 +176,8 @@ else:
 fv_table_schema = df['TABLE_SCHEMA'].drop_duplicates()
 fv_table_schema = fv_table_schema.append(all_option)
 
-selectbox_schema = st.sidebar.selectbox(
-    "Table Schema", fv_table_schema, len(fv_table_schema)-1, key=st.session_state.selectbox_schema_key)
+selectbox_schema = streamlit.sidebar.selectbox(
+    "Table Schema", fv_table_schema, len(fv_table_schema)-1, key=streamlit.session_state.selectbox_schema_key)
 
 if selectbox_schema != 'All':
     df = df.loc[df['TABLE_SCHEMA'] == selectbox_schema]
@@ -187,8 +187,8 @@ else:
 # Table Owner
 fv_owner = df['TABLE_OWNER'].drop_duplicates()
 fv_owner = fv_owner.append(all_option)
-selectbox_owner = st.sidebar.selectbox(
-    "Table Owner", fv_owner, len(fv_owner)-1, key=st.session_state.selectbox_owner_key)
+selectbox_owner = streamlit.sidebar.selectbox(
+    "Table Owner", fv_owner, len(fv_owner)-1, key=streamlit.session_state.selectbox_owner_key)
 
 if selectbox_owner != 'All':
     df = df.loc[df['TABLE_OWNER'] == selectbox_owner]
@@ -197,8 +197,8 @@ else:
 
 # Table Type
 fv_table_type = df['TABLE_TYPE'].drop_duplicates()
-selectbox_table_type = st.sidebar.multiselect(
-    'Table Type', fv_table_type, fv_table_type, key=st.session_state.selectbox_table_type_key)
+selectbox_table_type = streamlit.sidebar.multiselect(
+    'Table Type', fv_table_type, fv_table_type, key=streamlit.session_state.selectbox_table_type_key)
 
 if len(selectbox_table_type) > 0:
     df = df.loc[df['TABLE_TYPE'].isin(selectbox_table_type)]
@@ -219,8 +219,8 @@ elif max_data_mb>1000000000:
 elif max_data_mb>1000000000000:
     step_size=10000      
 
-data_size = st.sidebar.slider(
-    'Data Size (MB)', 0, max_data_mb+1, (0, max_data_mb+1), key=st.session_state.selectbox_data_size_key, step=step_size)
+data_size = streamlit.sidebar.slider(
+    'Data Size (MB)', 0, max_data_mb+1, (0, max_data_mb+1), key=streamlit.session_state.selectbox_data_size_key, step=step_size)
 df = df.loc[(df['BYTES'] >= data_size[0]*1048576) &
             (df['BYTES'] <= data_size[1]*1048576)]
 
@@ -235,22 +235,22 @@ elif max_rows>1000000000:
 elif max_rows>1000000000000:
     step_size=10000    
 
-data_rows = st.sidebar.slider('Number of Rows', 0, max_rows+1,
-                              (0, max_rows+1), key=st.session_state.selectbox_max_rows_key, step=step_size)
+data_rows = streamlit.sidebar.slider('Number of Rows', 0, max_rows+1,
+                              (0, max_rows+1), key=streamlit.session_state.selectbox_max_rows_key, step=step_size)
 df = df.loc[(df['ROW_COUNT'] >= data_rows[0]) &
             (df['ROW_COUNT'] <= data_rows[1])]
 
 
 def reset_button():
-    st.session_state.selectbox_database_key = st.session_state.selectbox_database_key+1
-    st.session_state.selectbox_schema_key = st.session_state.selectbox_schema_key+1
-    st.session_state.selectbox_owner_key = st.session_state.selectbox_owner_key+1
-    st.session_state.selectbox_table_type_key = st.session_state.selectbox_table_type_key+1
-    st.session_state.selectbox_max_rows_key = st.session_state.selectbox_max_rows_key+1
-    st.session_state.selectbox_data_size_key = st.session_state.selectbox_data_size_key+1
+    streamlit.session_state.selectbox_database_key = streamlit.session_state.selectbox_database_key+1
+    streamlit.session_state.selectbox_schema_key = streamlit.session_state.selectbox_schema_key+1
+    streamlit.session_state.selectbox_owner_key = streamlit.session_state.selectbox_owner_key+1
+    streamlit.session_state.selectbox_table_type_key = streamlit.session_state.selectbox_table_type_key+1
+    streamlit.session_state.selectbox_max_rows_key = streamlit.session_state.selectbox_max_rows_key+1
+    streamlit.session_state.selectbox_data_size_key = streamlit.session_state.selectbox_data_size_key+1
 
 
-clear_button = st.sidebar.button(
+clear_button = streamlit.sidebar.button(
     label='Clear Selections', on_click=reset_button)
 
 if clear_button:
@@ -377,4 +377,4 @@ for index, row in df.iterrows():
     </div>
 </div>"""
 
-st.markdown(table_scorecard, unsafe_allow_html=True)
+streamlit.markdown(table_scorecard, unsafe_allow_html=True)
