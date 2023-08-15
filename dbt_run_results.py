@@ -23,7 +23,7 @@ run_results = get_run_results()
 streamlit.dataframe(run_results)
 #df = pd.dataframe(run_results)
 
-#streamlit.metric(label="Models", value=df['2'].nunique(), delta="1.2 °F")
+streamlit.metric(label="Models", value=df['2'].nunique(), delta="1.2 °F")
 
 #streamlit.dataframe(df)
 
