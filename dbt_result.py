@@ -162,7 +162,7 @@ if 'selectbox_database_key' not in streamlit.session_state:
 
 # Table Catalog/Database
 fv_database = df['TABLE_CATALOG'].drop_duplicates()
-fv_database = fv_database.concat(all_option)
+fv_database = fv_database._append(all_option)
 
 selectbox_database = streamlit.sidebar.selectbox(
     'Database', fv_database, index=len(fv_database)-1, key=streamlit.session_state.selectbox_database_key)
@@ -174,7 +174,7 @@ else:
 
 # Table Schema
 fv_table_schema = df['TABLE_SCHEMA'].drop_duplicates()
-fv_table_schema = fv_table_schema.concat(all_option)
+fv_table_schema = fv_table_schema._append(all_option)
 
 selectbox_schema = streamlit.sidebar.selectbox(
     "Table Schema", fv_table_schema, len(fv_table_schema)-1, key=streamlit.session_state.selectbox_schema_key)
@@ -186,7 +186,7 @@ else:
 
 # Table Owner
 fv_owner = df['TABLE_OWNER'].drop_duplicates()
-fv_owner = fv_owner.concat(all_option)
+fv_owner = fv_owner._append(all_option)
 selectbox_owner = streamlit.sidebar.selectbox(
     "Table Owner", fv_owner, len(fv_owner)-1, key=streamlit.session_state.selectbox_owner_key)
 
