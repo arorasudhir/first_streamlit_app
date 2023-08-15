@@ -23,7 +23,7 @@ run_results = get_run_results()
 streamlit.dataframe(run_results)
 #df = pd.dataframe(run_results)
 
-streamlit.metric(label="Models", value=run_results.columns[2].count())
+streamlit.metric(label="Models", value=run_results[2].count())
 
 #streamlit.dataframe(df)
 
