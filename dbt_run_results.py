@@ -18,13 +18,12 @@ def get_run_results():
         
 streamlit.title('DBT RUN RESULTS')
 run_results = get_run_results()
-streamlit.dataframe(run_results)
 df = pd.DataFrame(run_results)
 streamlit.write(df)
 
 #df = pd.dataframe(run_results)
 
-#streamlit.metric(label="Models", value=run_results[2].count())
+streamlit.metric(label="Models", value=len(df.index))
 
 #streamlit.dataframe(df)
 
