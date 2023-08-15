@@ -14,14 +14,14 @@ def get_run_results():
     with conn.cursor() as cur:
         query = "SELECT * from DBT_RESULTS t;"
         cur.execute(query)
-        #return cur.fetchall()        
-        df = pd.DataFrame(cur.fetchall())
-        streamlit.text(type(df))
-        return df
-
+        return cur.fetchall()        
+        
 streamlit.title('DBT RUN RESULTS')
 run_results = get_run_results()
 streamlit.dataframe(run_results)
+df = pd.DataFrame(run_results)
+streamlit.dataframe(df)
+
 #df = pd.dataframe(run_results)
 
 #streamlit.metric(label="Models", value=run_results[2].count())
