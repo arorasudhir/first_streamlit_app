@@ -14,7 +14,7 @@ def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
         dat = cur.fetchall()
-        df = pd.DataFrame(dat, columns=[col[0] for col in cur.description])
+        #df = pd.DataFrame(dat, columns=[col[0] for col in cur.description])
         return df
 
 
@@ -34,7 +34,7 @@ from
 df2 = df
 
 streamlit.title('DBT RUN RESULTS')
-streamlit.text(df2)
+streamlit.dataframe(df2)
 
 
 #streamlit.metric(label="Models", value="70 °F", delta="1.2 °F")
