@@ -8,7 +8,6 @@ st.set_page_config(layout="wide")
 # Uses st.experimental_singleton to only run once.
 
 
-@st.experimental_singleton
 def init_connection():
     return snowflake.connector.connect(**st.secrets["snowflake"])
 
@@ -19,7 +18,7 @@ cur = conn.cursor()
 # Perform query.
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
 
-@st.experimental_memo(ttl=600)
+
 def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
