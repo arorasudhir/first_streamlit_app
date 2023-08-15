@@ -1,15 +1,15 @@
 #from turtle import onclick
-import streamlit as st
+import streamlit
 import snowflake.connector
 import pandas as pd
 #import streamlit.components.v1 as components
-st.set_page_config(layout="wide")
+streamlit.set_page_config(layout="wide")
 # Initialize connection.
 # Uses st.experimental_singleton to only run once.
 
 
 def init_connection():
-    return snowflake.connector.connect(**st.secrets["snowflake"])
+    return snowflake.connector.connect(**streamlit.secrets["snowflake"])
 
 
 conn = init_connection()
