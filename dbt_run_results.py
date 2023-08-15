@@ -34,7 +34,7 @@ from
 df2 = df
 
 streamlit.title('DBT RUN RESULTS')
- streamlit.text(df2)
+streamlit.text(df2)
 
 
 #streamlit.metric(label="Models", value="70 °F", delta="1.2 °F")
