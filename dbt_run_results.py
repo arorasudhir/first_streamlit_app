@@ -12,18 +12,7 @@ cur = conn.cursor()
 
 def get_run_results():
     with conn.cursor() as cur:
-        query = "SELECT
-                    t.RESULT_ID,
-                    t.INVOCATION_ID,
-                    t.UNIQUE_ID,
-                    t.DATABASE_NAME,
-                    t.SCHEMA_NAME,
-                    t.NAME,
-                    t.STATUS,
-                    t.EXECUTION_TIME,
-                    t.ROWS_AFFECTED
-                from
-                    DBT_RESULTS t;"
+        query = "SELECT * from DBT_RESULTS t;"
         cur.execute(query)
         return cur.fetchall()
         # df = pd.DataFrame(dat, columns=[col[0] for col in cur.description])
