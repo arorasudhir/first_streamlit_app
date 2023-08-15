@@ -20,7 +20,7 @@ streamlit.title('DBT RUN RESULTS')
 run_results = get_run_results()
 streamlit.dataframe(run_results)
 df = pd.DataFrame(run_results)
-streamlit.dataframe(df)
+streamlit.write(df)
 
 #df = pd.dataframe(run_results)
 
