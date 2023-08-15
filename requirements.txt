@@ -1,1 +1,2 @@
 snowflake-connector-python
+streamlit==1.25.0
