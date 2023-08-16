@@ -18,7 +18,7 @@ def get_run_results():
         
 streamlit.title('DBT RUN RESULTS')
 run_results = get_run_results()
-df = pd.DataFrame(run_results)
+df = pd.DataFrame(run_results, columns=["col1","cols2","col3","col4","cols5","col6","col7","cols8","col9","col10"])
 streamlit.write(df.keys())
 streamlit.write(df)
 
