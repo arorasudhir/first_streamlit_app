@@ -4,4 +4,4 @@ import streamlit
 data = pandas.read_csv('users_location.csv')
 
 streamlit.header('Where our Users come from?')
-streamlit.map(data, zoom=3)
+streamlit.map(data, zoom=1)
