@@ -13,7 +13,7 @@ cur = conn.cursor()
 
 def get_data():
     with conn.cursor() as cur:
-        query = "SELECT * from USERS_LOCATION;"
+        query = "SELECT * from USERS_LOCATION limit 1000;"
         cur.execute(query)
         return cur.fetchall()   
 
