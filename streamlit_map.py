@@ -7,8 +7,6 @@ import snowflake.connector
 streamlit.set_page_config(layout="wide")
 
 data = pandas.read_csv('users_location.csv')
-user_count = streamlit.slider('User Count', 0, 1000)
-data = data[data['USERS'] > user_count]
 
-streamlit.header('Where our Customers come from?')
+streamlit.header('Where our Users come from?')
 streamlit.map(data, zoom=7.5)
