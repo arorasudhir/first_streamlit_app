@@ -2,3 +2,4 @@ snowflake-connector-python
 streamlit==1.25.0
 folium
 streamlit-folium
+antropic
