@@ -1,12 +1,12 @@
 import pandas
 import folium
-import streamlit as st
+import streamlit
 from streamlit_folium import st_folium
 
-st.set_page_config(layout="wide")
+streamlit.set_page_config(layout="wide")
 
 def init_connection():
-    return snowflake.connector.connect(**st.secrets["snowflake"])
+    return snowflake.connector.connect(**streamlit.secrets["snowflake"])
 
 conn = init_connection()
 cur = conn.cursor()
@@ -17,6 +17,6 @@ def get_data():
         cur.execute(query)
         return cur.fetchall()   
 
-st.header('Where our users come from?')
+streamlit.header('Where our users come from?')
 data = get_data()
-st.map(data, zoom=7.5)
+streamlit.map(data, zoom=7.5)
