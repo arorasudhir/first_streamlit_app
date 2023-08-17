@@ -1,8 +1,5 @@
 import pandas
-import folium
 import streamlit
-from streamlit_folium import st_folium
-import snowflake.connector
 
 streamlit.set_page_config(layout="wide")
 
