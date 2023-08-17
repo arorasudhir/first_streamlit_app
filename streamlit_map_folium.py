@@ -5,7 +5,7 @@ from streamlit_folium import st_folium
 
 streamlit.set_page_config(layout="wide")
 
-data = pandas.read_csv('users_location.csv')
+data = pandas.read_csv('users_location_sample.csv')
 
 streamlit.header('Where our Customers come from?')
 map = folium.Map(location=[47.116386, -101.299591], zoom_start=1)
