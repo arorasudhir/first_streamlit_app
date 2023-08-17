@@ -1,12 +1,12 @@
 import pandas
 import folium
-import streamlit as at
+import streamlit
 from streamlit_folium import st_folium
 import snowflake.connector
 
-st.set_page_config(layout="wide")
+streamlit.set_page_config(layout="wide")
 
 data = pandas.read_csv('users_location.csv')
 
-st.header('Where our Customers come from?')
-st.map(data, zoom=7.5)
+streamlit.header('Where our Customers come from?')
+streamlit.map(data, zoom=7.5)
