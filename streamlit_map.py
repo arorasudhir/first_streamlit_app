@@ -3,7 +3,7 @@ import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
-streamlit.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 def init_connection():
     return snowflake.connector.connect(**streamlit.secrets["snowflake"])
