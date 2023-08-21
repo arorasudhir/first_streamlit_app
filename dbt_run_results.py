@@ -25,6 +25,10 @@ streamlit.write(df)
 
 streamlit.metric(label="Models", value=len(df.index))
 
+streamlit.metric(label="Success", value=len(df.index))
+
+streamlit.metric(label="Failed", value=0)
+
 #streamlit.dataframe(df)
 
 
